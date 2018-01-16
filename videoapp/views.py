@@ -1,19 +1,42 @@
-from django.shortcuts import render
+import json
+
+from django.core import serializers
+from django.http import JsonResponse
+from django.views.decorators.http import require_http_methods
+from videoapp.models import Book
+from django.views.generic import TemplateView
+
+
+class View(TemplateView):
+    template_name = 'index.html'
 
 # Create your views here.
-from videoapp.models import people
-from django.template import Context, Template
-from django.shortcuts import render, HttpResponse
+
+@require_http_methods(["GET"])
+def add_book(request):
+    response = {}
+    try:
+        book = Book(book_name=request.GET.get('book_name'))
+        book.save()
+        response['msg'] = 'success'
+        response['error_num'] = 0
+    except  Exception as e:
+        response['msg'] = str(e)
+        response['error_num'] = 1
+
+    return JsonResponse(response)
 
 
-def firstView(request):
-    p1 = people(name='wj', job='developer')
-    html_string ='''
-       fgfdg {{ p1.name }}
-        '''
+@require_http_methods(["GET"])
+def show_books(request):
+    response = {}
+    try:
+        books = Book.objects.filter()
+        response['list'] = json.loads(serializers.serialize("json", books))
+        response['msg'] = 'success'
+        response['error_num'] = 0
+    except  Exception as e:
+        response['msg'] = str(e)
+        response['error_num'] = 1
 
-    t = Template(html_string)
-    c = Context({"p1": p1})
-
-    web_page = t.render(c)
-    return HttpResponse(web_page)
+    return JsonResponse(response)

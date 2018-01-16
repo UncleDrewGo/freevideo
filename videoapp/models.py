@@ -1,7 +1,8 @@
 from django.db import models
 
 # Create your models here.
-class people(models.Model):
-    name = models.CharField(null=True,blank=True,max_length=200)
-    job = models.CharField(null=True,blank=True,max_length=200)
+class Book(models.Model):
+    book_name = models.CharField(max_length=64)
+    add_time = models.DateTimeField(auto_now_add=True)
+
 
