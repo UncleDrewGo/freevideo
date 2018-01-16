@@ -18,5 +18,5 @@ from django.urls import path
 from videoapp.views import firstView
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('people/', firstView)
+    path('', firstView),
 ]
