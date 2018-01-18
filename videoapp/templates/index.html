@@ -1,192 +1,205 @@
 <!DOCTYPE html>
 <html lang="zh-cn">
-	<head>
-		<meta charset="utf-8"/>
-		<meta name="viewport" content="width=device-width, initial-scale=1"/>
-		<title>VIP视频解析升级版-by逸轩</title>
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>VIP视频</title>
     <link rel="shortcut icon" href="./favicon.ico">
-		<link href="https://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet"/>
-		<style>
-		body {
-			background: #000;
-			height: 100%;
-		}
-		canvas {
-			height: 180%;
-			bottom: 0;
-			left: 0;
-			position: absolute;
-			right: 0;
-			top: 0;
-		}
-		#c1 {
-			opacity: 0;
-		}
-		#c2 {
-			background: #000;
-		}
-		</style>
-	</head>
-<body style="background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAQBAMAAAD+CqKmAAAAElBMVEXz8/Po6Oj////4+Pj7+/v19fXck713AAAAbklEQVQI11XNwQkDMQxE0QFJBWRKSAUCxXeB7bvA2f5bCcHgTf7hXx8eP4HPb/vgLAEoUuKgqeBiZmWA3dBfjJQBcK2spJWqgS1ChLDIAU7NcI6Y3v6djexj2U1BZzsUfL0PBe9+KMh1U7CSQ30ArNcZPoEeBscAAAAASUVORK5CYII=');">
-	<canvas id="c1"></canvas>
-	<canvas id="c2"></canvas>
-	<div class="col-xs-12 col-sm-10 col-md-8 col-lg-6 center-block" style="float: none;">
-		<h3 class="text-muted" align="center" style="color:#fff;">VIP视频解析升级版-by逸轩</h3><hr>
-			<table class="table table-bordered">
-				<tbody>
-					<div class="col-md-14 column">
-						<div class="panel panel-default">
-							<div id="kj" class="panel-body">
-								<iframe src="about:blank" id="player" width="100%" height="400px" allowtransparency="true" frameborder="0" scrolling="no" style="background:#000;"></iframe>
-							</div>
-						</div>
-					</div>
-					<tr>
-						<div class="col-md-14 column">
-							<form method="get" id="1233911832">
-								<div class="input-group" style="width: 100%;">
-									<span class="input-group-addon input-lg" style="width: 80px; ">选择接口</span>
-									<select class="form-control input-lg" id="jk">
-                                        <option value="http://zhjiexi.cn/jx.php?url=">综合解析</option>
-									</select>
-								</div><br>
-								<div class="input-group" style="width: 100%;">
-									<span class="input-group-addon input-lg" style="width: 80px;">播放地址</span>
-									<input class="form-control input-lg" type="search" placeholder="输入播放地址" id="url">
+    <link href="https://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet"/>
+    <style>
+        body {
+            background: #000;
+            height: 100%;
+        }
 
-								</div><br>
-								<div><button id="bf" type="button" class="btn btn-primary btn-lg btn-block" onclick='var diz = document.getElementById("url").value;var jkurl = document.getElementById("jk");var jk = document.getElementById("jk").selectedIndex;var jkv = jkurl.options[jk].value;var cljurl = document.getElementById("player");cljurl.src = jkv + diz;'>观看</button>
-								</div>
-							</form>
-						</div>
-					</tr>
-				</tbody>
-			</table>
-			<table class="table table-bordered" style="background: rgba(0,0,0,.3);color:#fff;">
-				<thead>
-					<tr></tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>
-							<ol>
-								<h5>
-									<li>目前最稳定速度最快的是1 4 8 号通道推荐</li><br>
-									<li>如果遇到无法播放 切换播放通道 不同的网站可能跟解析服务器支持有关</li><br>
-									<li>这些接口来源于网络泄露特别是会员解析通道 低调使用 我会定期更新</li><br>
-									<li>QQ群 ①群：<a target="_blank" href="./qq/api/joingroup.php?qun=490844072"><img border="0" src="https://pub.idqqimg.com/wpa/images/group.png" alt="点击加群" title="点击加群"></a> |  ②群：<a target="_blank" href="./qq/api/joingroup.php?qun=143946691"><img border="0" src="https://pub.idqqimg.com/wpa/images/group.png" alt="点击加群" title="点击加群"></a> 有问题群里说 </li><br>
-									<li>升级解析口 47解析不支持本地只支持网页的问题在研究中没拿到会员解析接口 2017.7.6 By：逸轩 </li><br>
-									<li>新手使用，必读说明（如何获取vip视频播放地址） <a href="https://www.wuaishare.cn/thread-959-1-1.html" class="btn btn-default" target="_blank">♚点击进入♚</a> </li><br>
-								</h5>
-							</ol>
-						</td>
-					</tr>
-				</tbody>
-			</table>
-      <center><a class="btn btn-default" href="javascript:;">友情链接：</a> <a class="btn btn-default" href="https://www.wuaishare.cn"target="_blank">♚吾爱分享论坛♚</a> <a  class="btn btn-default" href="https://git.oschina.net/wuaishare/video"target="_blank">♚下载本站源码♚</a></center>
-<script>
-	var c1=document.getElementById( 'c1'),
-	ctx1=c1.getContext( '2d'),
-	c2=document.getElementById( 'c2'),
-	ctx2=c2.getContext( '2d'),
-	twopi=Math.PI * 2,
-	parts=[],
-	sizeBase,
-	cw,
-	opt,
-	hue,
-	count;
-	function rand( min, max) {
-		return Math.random() * ( max - min)+min;
-	}
-	function hsla( h, s, l, a) {
-		return 'hsla('+h+','+s+'%,'+l+'%,'+a+')';
-	}
-	function create() {
-		sizeBase=cw+ch;
-		count=Math.floor( sizeBase * 0.3),
-		hue=rand( 0, 360),
-		opt= {
-			radiusMin: 1, radiusMax: sizeBase * 0.04, blurMin: 10, blurMax: sizeBase * 0.04, hueMin: hue, hueMax: hue + 100, saturationMin: 10, saturationMax: 70, lightnessMin: 20, lightnessMax: 50, alphaMin: 0.1, alphaMax: 0.5
-		}
-		ctx1.clearRect( 0, 0, cw, ch);
-		ctx1.globalCompositeOperation='lighter';
-		while( count--) {
-			var radius=rand( opt.radiusMin, opt.radiusMax),
-			blur=rand( opt.blurMin, opt.blurMax),
-			x=rand( 0, cw),
-			y=rand( 0, ch),
-			hue=rand(opt.hueMin, opt.hueMax),
-			saturation=rand( opt.saturationMin, opt.saturationMax),
-			lightness=rand( opt.lightnessMin, opt.lightnessMax),
-			alpha=rand( opt.alphaMin, opt.alphaMax);
-			ctx1.shadowColor=hsla( hue, saturation, lightness, alpha);
-			ctx1.shadowBlur=blur;
-			ctx1.beginPath();
-			ctx1.arc( x, y, radius, 0, twopi);
-			ctx1.closePath();
-			ctx1.fill();
-		}
-		parts.length=0;
-		for( var i=0;
-		i < Math.floor( ( cw + ch) * 0.03);
-		i++) {
-			parts.push( {
-				radius: rand( 1, sizeBase * 0.03), x: rand( 0, cw), y: rand( 0, ch), angle: rand( 0, twopi), vel: rand( 0.1, 0.5), tick: rand( 0, 10000)
-			}
-			);
-		}
-	}
-	function init() {
-		resize();
-		create();
-		loop();
-	}
-	function loop() {
-		requestAnimationFrame( loop);
-		ctx2.clearRect( 0, 0, cw, ch);
-		ctx2.globalCompositeOperation='source-over';
-		ctx2.shadowBlur=0;
-		ctx2.drawImage( c1, 0, 0);
-		ctx2.globalCompositeOperation='lighter';
-		var i=parts.length;
-		ctx2.shadowBlur=15;
-		ctx2.shadowColor='#fff';
-		while( i--) {
-			var part=parts[ i];
-			part.x+=Math.cos( part.angle) * part.vel;
-			part.y+=Math.sin( part.angle) * part.vel;
-			part.angle+=rand( -0.05, 0.05);
-			ctx2.beginPath();
-			ctx2.arc( part.x, part.y, part.radius, 0, twopi);
-			ctx2.fillStyle=hsla( 0, 0, 100, 0.075 + Math.cos( part.tick * 0.02) * 0.05);
-			ctx2.fill();
-			if( part.x - part.radius > cw) {
-				part.x=-part.radius
-			}
-			if( part.x + part.radius < 0) {
-				part.x=cw+part.radius
-			}
-			if( part.y - part.radius > ch) {
-				part.y=-part.radius
-			}
-			if( part.y + part.radius < 0) {
-				part.y=ch+part.radius
-			}
-			part.tick++;
-		}
-	}
-	function resize() {
-		cw=c1.width=c2.width=window.innerWidth,
-		ch=c1.height=c2.height=window.innerHeight;
-		create();
-	}
-	function click() {
-		create()
-	}
-	window.addEventListener( 'resize', resize);
-	window.addEventListener( 'click', click);
-	init();
-</script>
+        canvas {
+            height: 180%;
+            bottom: 0;
+            left: 0;
+            position: absolute;
+            right: 0;
+            top: 0;
+        }
+
+        #c1 {
+            opacity: 0;
+        }
+
+        #c2 {
+            background: #000;
+        }
+    </style>
+</head>
+<body style="background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAQBAMAAAD+CqKmAAAAElBMVEXz8/Po6Oj////4+Pj7+/v19fXck713AAAAbklEQVQI11XNwQkDMQxE0QFJBWRKSAUCxXeB7bvA2f5bCcHgTf7hXx8eP4HPb/vgLAEoUuKgqeBiZmWA3dBfjJQBcK2spJWqgS1ChLDIAU7NcI6Y3v6djexj2U1BZzsUfL0PBe9+KMh1U7CSQ30ArNcZPoEeBscAAAAASUVORK5CYII=');">
+<canvas id="c1"></canvas>
+<canvas id="c2"></canvas>
+<div class="col-xs-12 col-sm-10 col-md-8 col-lg-6 center-block" style="float: none;">
+    <h3 class="text-muted" align="center" style="color:#fff;">尽情观看吧!</h3>
+    <hr>
+    <table class="table table-bordered">
+        <tbody>
+        <div class="col-md-14 column">
+            <div class="panel panel-default">
+                <div id="kj" class="panel-body">
+                    <iframe src="about:blank" id="player" width="100%" height="400px" allowtransparency="true"
+                            frameborder="0" scrolling="no" style="background:#000;"></iframe>
+                </div>
+            </div>
+        </div>
+        <tr>
+            <div class="col-md-14 column">
+                <form method="get" id="1233911832">
+                    <div class="input-group" style="width: 100%;">
+                        <span class="input-group-addon input-lg" style="width: 80px; ">选择接口</span>
+                        <select class="form-control input-lg" id="jk">
+                            <option value="http://zhjiexi.cn/jx.php?url=">综合解析</option>
+                        </select>
+                    </div>
+                    <br>
+                    <div class="input-group" style="width: 100%;">
+                        <span class="input-group-addon input-lg" style="width: 80px;">播放地址</span>
+                        <input class="form-control input-lg" type="search" placeholder="输入播放地址" id="url">
+
+                    </div>
+                    <br>
+                    <div>
+                        <button id="bf" type="button" class="btn btn-primary btn-lg btn-block"
+                                onclick='var diz = document.getElementById("url").value;var jkurl = document.getElementById("jk");var jk = document.getElementById("jk").selectedIndex;var jkv = jkurl.options[jk].value;var cljurl = document.getElementById("player");cljurl.src = jkv + diz;'>
+                            观看
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </tr>
+        </tbody>
+    </table>
+    <script>
+        var c1 = document.getElementById('c1'),
+            ctx1 = c1.getContext('2d'),
+            c2 = document.getElementById('c2'),
+            ctx2 = c2.getContext('2d'),
+            twopi = Math.PI * 2,
+            parts = [],
+            sizeBase,
+            cw,
+            opt,
+            hue,
+            count;
+
+        function rand(min, max) {
+            return Math.random() * (max - min) + min;
+        }
+
+        function hsla(h, s, l, a) {
+            return 'hsla(' + h + ',' + s + '%,' + l + '%,' + a + ')';
+        }
+
+        function create() {
+            sizeBase = cw + ch;
+            count = Math.floor(sizeBase * 0.3),
+                hue = rand(0, 360),
+                opt = {
+                    radiusMin: 1,
+                    radiusMax: sizeBase * 0.04,
+                    blurMin: 10,
+                    blurMax: sizeBase * 0.04,
+                    hueMin: hue,
+                    hueMax: hue + 100,
+                    saturationMin: 10,
+                    saturationMax: 70,
+                    lightnessMin: 20,
+                    lightnessMax: 50,
+                    alphaMin: 0.1,
+                    alphaMax: 0.5
+                }
+            ctx1.clearRect(0, 0, cw, ch);
+            ctx1.globalCompositeOperation = 'lighter';
+            while (count--) {
+                var radius = rand(opt.radiusMin, opt.radiusMax),
+                    blur = rand(opt.blurMin, opt.blurMax),
+                    x = rand(0, cw),
+                    y = rand(0, ch),
+                    hue = rand(opt.hueMin, opt.hueMax),
+                    saturation = rand(opt.saturationMin, opt.saturationMax),
+                    lightness = rand(opt.lightnessMin, opt.lightnessMax),
+                    alpha = rand(opt.alphaMin, opt.alphaMax);
+                ctx1.shadowColor = hsla(hue, saturation, lightness, alpha);
+                ctx1.shadowBlur = blur;
+                ctx1.beginPath();
+                ctx1.arc(x, y, radius, 0, twopi);
+                ctx1.closePath();
+                ctx1.fill();
+            }
+            parts.length = 0;
+            for (var i = 0;
+                 i < Math.floor((cw + ch) * 0.03);
+                 i++) {
+                parts.push({
+                        radius: rand(1, sizeBase * 0.03),
+                        x: rand(0, cw),
+                        y: rand(0, ch),
+                        angle: rand(0, twopi),
+                        vel: rand(0.1, 0.5),
+                        tick: rand(0, 10000)
+                    }
+                );
+            }
+        }
+
+        function init() {
+            resize();
+            create();
+            loop();
+        }
+
+        function loop() {
+            requestAnimationFrame(loop);
+            ctx2.clearRect(0, 0, cw, ch);
+            ctx2.globalCompositeOperation = 'source-over';
+            ctx2.shadowBlur = 0;
+            ctx2.drawImage(c1, 0, 0);
+            ctx2.globalCompositeOperation = 'lighter';
+            var i = parts.length;
+            ctx2.shadowBlur = 15;
+            ctx2.shadowColor = '#fff';
+            while (i--) {
+                var part = parts[i];
+                part.x += Math.cos(part.angle) * part.vel;
+                part.y += Math.sin(part.angle) * part.vel;
+                part.angle += rand(-0.05, 0.05);
+                ctx2.beginPath();
+                ctx2.arc(part.x, part.y, part.radius, 0, twopi);
+                ctx2.fillStyle = hsla(0, 0, 100, 0.075 + Math.cos(part.tick * 0.02) * 0.05);
+                ctx2.fill();
+                if (part.x - part.radius > cw) {
+                    part.x = -part.radius
+                }
+                if (part.x + part.radius < 0) {
+                    part.x = cw + part.radius
+                }
+                if (part.y - part.radius > ch) {
+                    part.y = -part.radius
+                }
+                if (part.y + part.radius < 0) {
+                    part.y = ch + part.radius
+                }
+                part.tick++;
+            }
+        }
+
+        function resize() {
+            cw = c1.width = c2.width = window.innerWidth,
+                ch = c1.height = c2.height = window.innerHeight;
+            create();
+        }
+
+        function click() {
+            create()
+        }
+
+        window.addEventListener('resize', resize);
+        window.addEventListener('click', click);
+        init();
+    </script>
 </body>
 </html>
